@@ -36,7 +36,7 @@ end
 
 template "/etc/ssh/secondary_sshd_config" do
   listen_port = node["secondary_sshd"]["listen_port"]
-  source "ssh_sshd_config"
+  source "ssh_sshd_config.erb"
   owner "root"
   group "root"
   variables(
