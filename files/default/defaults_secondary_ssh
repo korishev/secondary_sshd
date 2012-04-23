@@ -2,4 +2,4 @@
 # /etc/init.d/secondary_ssh.
 
 # Options to pass to secondary sshd
-SSHD_OPTS=
+SSHD_OPTS=-f/etc/ssh/secondary_sshd_config
