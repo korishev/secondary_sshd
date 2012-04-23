@@ -16,3 +16,47 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+require_recipe 'openssh'
+
+link "/usr/sbin/secondary_sshd" do
+  to "/usr/sbin/sshd"
+  type :hard
+end
+
+link "/etc/pam.d/secondary_sshd" do
+  to "/etc/pam.d/sshd"
+  type :hard
+end
+
+link "/etc/ssh/secondary_ssh_config" do
+  to "/etc/ssh/ssh_config"
+  type :hard
+end
+
+cookbook_file "/etc/ssh/secondary_sshd_config" do
+  source "ssh_sshd_config"
+  owner "root"
+  group "root"
+  variables(
+    :listen_port => node["secondary_sshd"]["listen_port"]
+    )
+end
+
+cookbook_file "/etc/init.d/secondary_sshd" do
+  source "initd_ssh"
+  owner "root"
+  group "root"
+end
+
+cookbook_file "/etc/init/ssh.conf" do
+  source "init_ssh.conf"
+  owner "root"
+  group "root"
+end
+
+cookbook_file "/etc/defaults/secondary_ssh" do
+  source "defaults_secondary_ssh"
+  owner "root"
+  group "root"
+end
