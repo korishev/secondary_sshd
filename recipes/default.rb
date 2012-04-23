@@ -48,16 +48,19 @@ cookbook_file "/etc/init.d/secondary_sshd" do
   source "initd_ssh"
   owner "root"
   group "root"
+  mode  "0755"
 end
 
-cookbook_file "/etc/init/ssh.conf" do
+cookbook_file "/etc/init/secondary_ssh.conf" do
   source "init_ssh.conf"
   owner "root"
   group "root"
+  mode  "0644"
 end
 
 cookbook_file "/etc/default/secondary_ssh" do
   source "defaults_secondary_ssh"
   owner "root"
   group "root"
+  mode  "0644"
 end
