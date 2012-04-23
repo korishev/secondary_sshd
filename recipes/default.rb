@@ -56,7 +56,7 @@ cookbook_file "/etc/init/ssh.conf" do
   group "root"
 end
 
-cookbook_file "/etc/defaults/secondary_ssh" do
+cookbook_file "/etc/default/secondary_ssh" do
   source "defaults_secondary_ssh"
   owner "root"
   group "root"
