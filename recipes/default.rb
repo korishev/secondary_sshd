@@ -65,7 +65,7 @@ cookbook_file "/etc/default/secondary_ssh" do
   mode  "0644"
 end
 
-service "secondary_ssh" do
+service "secondary_sshd" do
   supports :status => true, :start => true, :stop => true, :restart => true
   action [ :enable, :start ]
 end
