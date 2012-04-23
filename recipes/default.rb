@@ -21,17 +21,17 @@ require_recipe 'openssh'
 
 link "/usr/sbin/secondary_sshd" do
   to "/usr/sbin/sshd"
-  type :hard
+  link_type :hard
 end
 
 link "/etc/pam.d/secondary_sshd" do
   to "/etc/pam.d/sshd"
-  type :hard
+  link_type :hard
 end
 
 link "/etc/ssh/secondary_ssh_config" do
   to "/etc/ssh/ssh_config"
-  type :hard
+  link_type :hard
 end
 
 cookbook_file "/etc/ssh/secondary_sshd_config" do
