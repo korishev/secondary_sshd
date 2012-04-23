@@ -35,12 +35,13 @@ link "/etc/ssh/secondary_ssh_config" do
 end
 
 cookbook_file "/etc/ssh/secondary_sshd_config" do
+  listen_port = node["secondary_sshd"]["listen_port"]
   source "ssh_sshd_config"
   owner "root"
   group "root"
   variables(
-    :listen_port => node["secondary_sshd"]["listen_port"]
-    )
+    :listen_port => listen_port
+  )
 end
 
 cookbook_file "/etc/init.d/secondary_sshd" do
