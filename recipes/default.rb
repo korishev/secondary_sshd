@@ -19,6 +19,11 @@
 
 require_recipe 'openssh'
 
+service "secondary_sshd" do
+  supports :status => true, :start => true, :stop => true, :restart => true
+  action [ :enable, :start ]
+end
+
 link "/usr/sbin/secondary_sshd" do
   to "/usr/sbin/sshd"
   link_type :hard
@@ -63,9 +68,4 @@ cookbook_file "/etc/default/secondary_ssh" do
   owner "root"
   group "root"
   mode  "0644"
-end
-
-service "secondary_sshd" do
-  supports :status => true, :start => true, :stop => true, :restart => true
-  action [ :enable, :start ]
 end
