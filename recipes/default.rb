@@ -53,7 +53,7 @@ cookbook_file "/etc/init.d/secondary_sshd" do
   notifies :restart, "service[secondary_sshd]"
 end
 
-cookbook_file "/etc/init/secondary_ssh.conf" do
+cookbook_file "/etc/init/secondary_sshd.conf" do
   source "init_ssh.conf"
   owner "root"
   group "root"
