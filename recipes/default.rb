@@ -19,11 +19,6 @@
 
 require_recipe 'openssh'
 
-service "secondary_sshd" do
-  supports :status => true, :start => true, :stop => true, :restart => true
-  action [ :enable, :start ]
-end
-
 link "/usr/sbin/secondary_sshd" do
   to "/usr/sbin/sshd"
   link_type :hard
@@ -47,6 +42,7 @@ template "/etc/ssh/secondary_sshd_config" do
   variables(
     :listen_port => listen_port
   )
+  notifies :restart, "service[secondary_sshd]"
 end
 
 cookbook_file "/etc/init.d/secondary_sshd" do
@@ -54,6 +50,7 @@ cookbook_file "/etc/init.d/secondary_sshd" do
   owner "root"
   group "root"
   mode  "0755"
+  notifies :restart, "service[secondary_sshd]"
 end
 
 cookbook_file "/etc/init/secondary_ssh.conf" do
@@ -61,6 +58,7 @@ cookbook_file "/etc/init/secondary_ssh.conf" do
   owner "root"
   group "root"
   mode  "0644"
+  notifies :restart, "service[secondary_sshd]"
 end
 
 cookbook_file "/etc/default/secondary_ssh" do
@@ -68,4 +66,10 @@ cookbook_file "/etc/default/secondary_ssh" do
   owner "root"
   group "root"
   mode  "0644"
+  notifies :restart, "service[secondary_sshd]"
+end
+
+service "secondary_sshd" do
+  supports :status => true, :start => true, :stop => true, :restart => true
+  action [ :enable, :start ]
 end
